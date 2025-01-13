@@ -1,87 +1,34 @@
-import { useEffect, useState } from 'react'
+import {useFetch} from "../Hooks"
 
-function App() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [data, setData] = useState([]);
+const url = "https://Api.example,com/data"
 
-  const fetchData = async () => {
-    try {
-        const response = await fetch('https://Api.example,com/data');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-        
-        } catch (error) {
-            setError(error as string);
-          
-        }
-        finally {
-            setLoading(false);
-    }
-  };
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error fetching data: {error}</div>;
-    }
-
-    return (
-      <div>
-        <h1>all good</h1>
-        <div>{JSON.stringify(data)}</div>
-      </div>
-    );
-  }
-
-export default App 
-
-/*function App() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [data, setData] = useState([]);
-
-    const fetchData = async () => {
-        try {
-            const response = await fetch('https://api.example.com/data');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
-            setData(result);
-        } catch (error) {
-            setError(error as string);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error fetching data: {error}</div>;
-    }
-
-    return (
-        <div>
-            <h1>Data fetched successfully</h1>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-    );
+interface Data {
+  Name: string;
+  LastName: string; // interface para sustituir el tipo generico <T> en el useFetch
+  Age : number;
 }
 
-export default App;*/
+
+function App() {  
+  const {data, loading, errors} = useFetch<Data>(url) //cuando se trabaja con genericos se debe especificar el tipo de dato que se va a usar entre <> en este caso <Data> que es la interface que se creo arriba
+  
+
+if (loading) {
+    return <div>Loading...</div>;
+}
+
+if (errors) {
+    return <div>Error fetching data: {errors.message};
+    </div>;
+}
+
+return (
+  <div>
+    <h1>all good</h1>
+    <div>{JSON.stringify(data)}</div>
+  </div>
+);}
+
+  
+
+export default App 
