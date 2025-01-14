@@ -1,34 +1,17 @@
-import {useFetch} from "../Hooks"
+import {Button} from "../components"// ruta sencilla gracias al archivo index.tsx que se encuentra en la carpeta components
 
-const url = "https://Api.example,com/data"
 
-interface Data {
-  Name: string;
-  LastName: string; // interface para sustituir el tipo generico <T> en el useFetch
-  Age : number;
+function App() {
+const handleClick = () => {
+  console.log("button clicked")
 }
 
 
-function App() {  
-  const {data, loading, errors} = useFetch<Data>(url) //cuando se trabaja con genericos se debe especificar el tipo de dato que se va a usar entre <> en este caso <Data> que es la interface que se creo arriba
-  
-
-if (loading) {
-    return <div>Loading...</div>;
+  return (
+    <Button  parentMethod = {handleClick}>
+      <div style={{"color": "red"}}>"esto es el children del Button"</div> {/* esto ee el componente children del Button que hace un div de color rojo con un texto cosa que no se podria hacer sin el children */}
+    </Button> 
+  )
 }
-
-if (errors) {
-    return <div>Error fetching data: {errors.message};
-    </div>;
-}
-
-return (
-  <div>
-    <h1>all good</h1>
-    <div>{JSON.stringify(data)}</div>
-  </div>
-);}
-
-  
 
 export default App 
