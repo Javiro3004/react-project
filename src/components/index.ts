@@ -1,3 +1,5 @@
 export * from './Button/Button'
 export * from './useRef/BookReader'
 export * from './useMemo/ShopingCart'
+export * from './modal/modal'
+export * from './modal/context/modalContext'
