@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react"
 
 export const PromiseError = () => {
-    const [data, setData] = useState<string | null>(null )
+    const [data, ] = useState<string | null>(null )
     const [error,setError ] = useState<string | null>(null)
 
     useEffect(() => { 
