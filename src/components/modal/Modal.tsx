@@ -12,7 +12,10 @@ export const Modal = ({children}: Props) => {
 
     const {State, setState} = useModalContext()// abrir o cerrar el modal
 
-    const closeModal = ( ) => {setState(false)}
+    const closeModal = ( ) => {
+        setState(false)
+        
+    }
 
     const modalRoot = document.getElementById("modal")
 
